@@ -3,9 +3,13 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const tmp = require('tmp');
 const cors = require("cors");
-const { ENV } = require('../constant');
-// const routes = require('../api/routes/v1');
+const uuid = require('node-uuid');
+
+const {
+	ENV
+} = require('../constant');
 const error = require('../middlewares/error');
+// const routes = require('../api/routes/v1');
 
 /**
  * Express instance
@@ -16,8 +20,16 @@ const app = express();
 // Include CSRF middlewares here
 app.use(cors(require('./cors.config')));
 
+app.use(function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,X-Custom-Header");
+	res.setHeader("reqId", req.get(reqId) ? req.get(reqId) : uuid.v1());
+	next();
+});
+
 // request logging. dev: console 
-app.use(morgan("combined",require('./morgan.config')(ENV)));
+app.use(morgan("combined", require('./morgan.config')(ENV)));
 
 // This middleware take care of the origin when the origin is undefined.
 // origin is undefined when request is local
@@ -27,8 +39,13 @@ app.use((req, _, next) => {
 });
 
 // parse body params and attache them to req.body
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ extended: true, limit: '20mb' }));
+app.use(express.json({
+	limit: '20mb'
+}));
+app.use(express.urlencoded({
+	extended: true,
+	limit: '20mb'
+}));
 
 // secure apps by setting various HTTP headers
 app.use(helmet());
