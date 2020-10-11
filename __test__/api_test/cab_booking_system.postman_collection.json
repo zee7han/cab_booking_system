@@ -1,0 +1,771 @@
+{
+	"info": {
+		"_postman_id": "f47c678d-1980-4db5-ae72-dd0fdf089b11",
+		"name": "booking system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ccc6ec5f-c518-45ec-835b-1c5bad912f16",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check for response time less than two second.\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check for message property in response.\", function () {",
+							"    pm.expect(jsonData.data).to.be.property(\"message\");",
+							"})",
+							"",
+							"pm.test(\"Check for message content.\", function () {",
+							"    pm.expect(jsonData.data.message).to.equal(\"User has been registered successfully!\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"zee\",\n    \"email\": \"zee@gmail.com\",\n    \"password\": \"zeeshan\",\n    \"role\": \"driver\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/auth/signup",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Registration",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zee\",\n    \"email\": \"zee@mail.com\",\n    \"password\": \"zeeshan\",\n    \"roles\": [\"admin\",\"moderator\"] \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "x-access-token, Origin, Content-Type, Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2f-ycIOj/6kXGxPaEoiW5+ikfXgO5w\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Oct 2020 03:35:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"User was registered successfully!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "user signin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7936994a-2b4a-4c00-9ca6-9fda2751c7a0",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Check for response time less than two second.\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check for properties in response.\", function () {",
+							"    pm.expect(jsonData.data).to.be.property(\"username\");",
+							"    pm.expect(jsonData.data).to.be.property(\"email\");",
+							"    pm.expect(jsonData.data).to.be.property(\"id\");",
+							"    pm.expect(jsonData.data).to.be.property(\"accessToken\");",
+							"})",
+							"",
+							"pm.test(\"Set the access_token as global\", function () {",
+							"    pm.environment.set(\"token\",jsonData.data.accessToken );",
+							"});",
+							"",
+							"pm.test(\"Set the userId as global\", function () {",
+							"    pm.environment.set(\"userId\",jsonData.data.id );",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"yoooo\",\n    \"password\": \"zeeshan\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/auth/signin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zee\",\n    \"password\": \"zeeshan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "x-access-token, Origin, Content-Type, Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "301"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12d-sn+Njxdu92GzZEKd4jIFZYftZPs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Oct 2020 03:38:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5f79431e96d33b9f9ce9e3b2\",\n    \"username\": \"zee\",\n    \"email\": \"zee@mail.com\",\n    \"roles\": [\n        \"ROLE_ADMIN\",\n        \"ROLE_MODERATOR\"\n    ],\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNzk0MzFlOTZkMzNiOWY5Y2U5ZTNiMiIsImlhdCI6MTYwMTc4MjY4NSwiZXhwIjoxNjAxODY5MDg1fQ.TCH9c0-c5-xpl3nG3DkCYamAg3O3n5kTn3QbRYQsMjs\"\n}"
+				}
+			]
+		},
+		{
+			"name": "onboard cab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38eb1403-752e-41ff-8d9c-083e53b714be",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Check for response time less than two second.\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check for message property in response.\", function () {",
+							"    pm.expect(jsonData.data).to.be.property(\"message\");",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cabNumber\": \"UP72 2982\",\n    \"isActive\": 1,\n    \"isAvailable\": 1,\n    \"isPink\": 0,\n    \"loc\": \"27.162045,77.986486\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/cabs/onboard_cab",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"cabs",
+						"onboard_cab"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zee\",\n    \"password\": \"zeeshan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "x-access-token, Origin, Content-Type, Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "301"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12d-sn+Njxdu92GzZEKd4jIFZYftZPs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Oct 2020 03:38:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5f79431e96d33b9f9ce9e3b2\",\n    \"username\": \"zee\",\n    \"email\": \"zee@mail.com\",\n    \"roles\": [\n        \"ROLE_ADMIN\",\n        \"ROLE_MODERATOR\"\n    ],\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNzk0MzFlOTZkMzNiOWY5Y2U5ZTNiMiIsImlhdCI6MTYwMTc4MjY4NSwiZXhwIjoxNjAxODY5MDg1fQ.TCH9c0-c5-xpl3nG3DkCYamAg3O3n5kTn3QbRYQsMjs\"\n}"
+				}
+			]
+		},
+		{
+			"name": "allocate cab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91389f6e-1c08-46aa-9ffe-639063ff0f55",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Check for response time less than two second.\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check for message property in response.\", function () {",
+							"    pm.expect(jsonData.data).to.be.property(\"message\");",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cabId\": \"5f8345357eb74c94fea97d64\",\n    \"source\": \"27.162045,77.986486\",\n    \"destination\": \"27.166007,77.984323\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/cabs/allocate_cab",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"cabs",
+						"allocate_cab"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zee\",\n    \"password\": \"zeeshan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "x-access-token, Origin, Content-Type, Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "301"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12d-sn+Njxdu92GzZEKd4jIFZYftZPs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Oct 2020 03:38:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5f79431e96d33b9f9ce9e3b2\",\n    \"username\": \"zee\",\n    \"email\": \"zee@mail.com\",\n    \"roles\": [\n        \"ROLE_ADMIN\",\n        \"ROLE_MODERATOR\"\n    ],\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNzk0MzFlOTZkMzNiOWY5Y2U5ZTNiMiIsImlhdCI6MTYwMTc4MjY4NSwiZXhwIjoxNjAxODY5MDg1fQ.TCH9c0-c5-xpl3nG3DkCYamAg3O3n5kTn3QbRYQsMjs\"\n}"
+				}
+			]
+		},
+		{
+			"name": "deport cab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "515d2d00-0eb2-4ff2-8045-e59b8d536d95",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Check for response time less than two second.\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check for properties in response.\", function () {",
+							"    pm.expect(jsonData.data).to.be.property(\"message\");",
+							"    pm.expect(jsonData.data).to.be.property(\"charges\");",
+							"    pm.expect(jsonData.data).to.be.property(\"duration\");",
+							"    pm.expect(jsonData.data).to.be.property(\"distance\");",
+							"",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rideId\": \"5f8359af85f2e4a29fb4b7b4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/v1/cabs/deport_cab",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"cabs",
+						"deport_cab"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zee\",\n    \"password\": \"zeeshan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "x-access-token, Origin, Content-Type, Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "301"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12d-sn+Njxdu92GzZEKd4jIFZYftZPs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Oct 2020 03:38:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5f79431e96d33b9f9ce9e3b2\",\n    \"username\": \"zee\",\n    \"email\": \"zee@mail.com\",\n    \"roles\": [\n        \"ROLE_ADMIN\",\n        \"ROLE_MODERATOR\"\n    ],\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNzk0MzFlOTZkMzNiOWY5Y2U5ZTNiMiIsImlhdCI6MTYwMTc4MjY4NSwiZXhwIjoxNjAxODY5MDg1fQ.TCH9c0-c5-xpl3nG3DkCYamAg3O3n5kTn3QbRYQsMjs\"\n}"
+				}
+			]
+		},
+		{
+			"name": "fetch cabs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e61ed5-1a83-4854-8e49-4308d5e80e71",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Check for response time less than two second.\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check for message property in response.\", function () {",
+							"    pm.expect(jsonData.data).to.be.property(\"cabsInfo\");",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"type": "text",
+						"value": "{{token}}",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/v1/cabs/fetch_cabs?lat=27.162045&long=77.986486&isPink=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"cabs",
+						"fetch_cabs"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "27.162045"
+						},
+						{
+							"key": "long",
+							"value": "77.986486"
+						},
+						{
+							"key": "isPink",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zee\",\n    \"password\": \"zeeshan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "x-access-token, Origin, Content-Type, Accept"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "301"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12d-sn+Njxdu92GzZEKd4jIFZYftZPs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Oct 2020 03:38:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"5f79431e96d33b9f9ce9e3b2\",\n    \"username\": \"zee\",\n    \"email\": \"zee@mail.com\",\n    \"roles\": [\n        \"ROLE_ADMIN\",\n        \"ROLE_MODERATOR\"\n    ],\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNzk0MzFlOTZkMzNiOWY5Y2U5ZTNiMiIsImlhdCI6MTYwMTc4MjY4NSwiZXhwIjoxNjAxODY5MDg1fQ.TCH9c0-c5-xpl3nG3DkCYamAg3O3n5kTn3QbRYQsMjs\"\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}

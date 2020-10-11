@@ -4,7 +4,8 @@
   "description": "A module for illustrating the cab booking.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "node ./__test__/api_test/runner.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "jsonwebtoken": "8.5.1",
     "mongoose": "5.10.9",
     "morgan": "1.10.0",
+    "newman": "^5.2.0",
     "node-uuid": "1.4.8",
     "tmp": "0.2.1",
     "winston": "3.3.3",

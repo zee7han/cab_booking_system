@@ -152,7 +152,6 @@ exports.deportCab = (body) => {
                     }
                     update_query.duration = hlpr.getDuration(ride.startTime, update_query.endTime);
                     update_query.charges = hlpr.getRideCharges(update_query.distance, update_query.duration, ride.isPinkRide)
-                    console.log(update_query);
                     Rides.updateOne({
                         _id: ride._id
                     }, update_query, (err, results) => {
