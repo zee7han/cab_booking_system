@@ -1,0 +1,22 @@
+{
+  "name": "cab_booking_system",
+  "version": "1.0.0",
+  "description": "A module for illustrating the cab booking.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zee7han/cab_booking_system.git"
+  },
+  "author": "Mohammad Zeeshan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zee7han/cab_booking_system/issues"
+  },
+  "homepage": "https://github.com/zee7han/cab_booking_system#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
