@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-const Cab = mongoose.model(
-  "Cab",
-  new mongoose.Schema({
+let cabSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -14,23 +12,29 @@ const Cab = mongoose.model(
         unique: true
     },
     isActive: {
-        type: Boolean,
+        type: Number,
         required: true
     },
     isAvailable: {
-        type: Boolean,
+        type: Number,
         required: true
     },
     isPink: {
-        type: Boolean,
+        type: Number,
         required: true
     },
     loc: {
-        "type": "Point",
-        "coordinates": [],
-        required: true
+        type: {
+            type: String
+        },
+        coordinates: [Number]
     }
-  })
-);
+})
+
+cabSchema.index({
+    loc: "2dsphere"
+});
+
+const Cab = mongoose.model("Cab", cabSchema);
 
 module.exports = Cab;
