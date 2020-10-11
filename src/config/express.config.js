@@ -9,7 +9,7 @@ const {
 	ENV
 } = require('../constant');
 const error = require('../middlewares/error');
-// const routes = require('../api/routes/v1');
+const routes = require('../routes');
 
 /**
  * Express instance
@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,X-Custom-Header");
-	res.setHeader("reqId", req.get(reqId) ? req.get(reqId) : uuid.v1());
+	res.setHeader("reqId", req.get("reqId") ? req.get("reqId") : uuid.v1());
 	next();
 });
 
@@ -51,7 +51,7 @@ app.use(express.urlencoded({
 app.use(helmet());
 
 // mount api v1 routes
-// app.use('/api/v1', routes);
+app.use('/v1', routes);
 
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter);
