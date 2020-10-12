@@ -4,8 +4,10 @@
   "description": "A module for illustrating the cab booking.",
   "main": "index.js",
   "scripts": {
-    "test": "node ./__test__/api_test/runner.js",
-    "start": "node src/index.js"
+    "api_test": "node ./__test__/api_test/runner.js",
+    "start": "node src/index.js",
+    "test": "./node_modules/jest/bin/jest.js",
+    "test_coverage": "./node_modules/jest/bin/jest.js --coverage "
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
     "express-validation": "1.0.2",
     "helmet": "4.1.1",
     "http-status": "1.4.2",
+    "jest": "^26.5.3",
     "joi": "14.3.1",
     "jsonwebtoken": "8.5.1",
     "mongoose": "5.10.9",

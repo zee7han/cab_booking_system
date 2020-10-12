@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "f47c678d-1980-4db5-ae72-dd0fdf089b11",
-		"name": "booking system",
+		"name": "cab_booking_system",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -40,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"zee\",\n    \"email\": \"zee@gmail.com\",\n    \"password\": \"zeeshan\",\n    \"role\": \"driver\" \n}",
+					"raw": "{\n    \"username\": \"{{username}}\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\",\n    \"role\": \"{{user}}\" \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,7 +170,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"yoooo\",\n    \"password\": \"zeeshan\"\n}",
+					"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,7 +278,10 @@
 							"pm.test(\"Check for message property in response.\", function () {",
 							"    pm.expect(jsonData.data).to.be.property(\"message\");",
 							"})",
-							""
+							"",
+							"pm.test(\"Set the cabId as global\", function () {",
+							"    pm.environment.set(\"cabId\",jsonData.data.cabId );",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -295,7 +298,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"cabNumber\": \"UP72 2982\",\n    \"isActive\": 1,\n    \"isAvailable\": 1,\n    \"isPink\": 0,\n    \"loc\": \"27.162045,77.986486\"\n}",
+					"raw": "{\n    \"cabNumber\": \"{{cabNumber}}\",\n    \"isActive\": 1,\n    \"isAvailable\": 1,\n    \"isPink\": {{isPink}},\n    \"loc\": \"{{loc}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -403,7 +406,10 @@
 							"pm.test(\"Check for message property in response.\", function () {",
 							"    pm.expect(jsonData.data).to.be.property(\"message\");",
 							"})",
-							""
+							"",
+							"pm.test(\"Set the rideId as global\", function () {",
+							"    pm.environment.set(\"rideId\",jsonData.data.ride._id );",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -420,7 +426,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"cabId\": \"5f8345357eb74c94fea97d64\",\n    \"source\": \"27.162045,77.986486\",\n    \"destination\": \"27.166007,77.984323\"\n}",
+					"raw": "{\n    \"cabId\": \"{{cabId}}\",\n    \"source\": \"{{source}}\",\n    \"destination\": \"{{destination}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -549,7 +555,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"rideId\": \"5f8359af85f2e4a29fb4b7b4\"\n}",
+					"raw": "{\n    \"rideId\": \"{{rideId}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -674,7 +680,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/v1/cabs/fetch_cabs?lat=27.162045&long=77.986486&isPink=0",
+					"raw": "{{url}}/v1/cabs/fetch_cabs?lat={{user_lat}}&long={{user_long}}&isPink=0",
 					"host": [
 						"{{url}}"
 					],
@@ -686,11 +692,11 @@
 					"query": [
 						{
 							"key": "lat",
-							"value": "27.162045"
+							"value": "{{user_lat}}"
 						},
 						{
 							"key": "long",
-							"value": "77.986486"
+							"value": "{{user_long}}"
 						},
 						{
 							"key": "isPink",

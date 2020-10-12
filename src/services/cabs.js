@@ -31,6 +31,7 @@ exports.onBoardCab = (body) => {
             } else {
                 resolve(responseHandler.success({
                     message: "Cab has been onboarded successfully!",
+                    cabId: cab._id
                 }));
             }
         });
