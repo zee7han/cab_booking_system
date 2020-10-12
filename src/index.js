@@ -1,4 +1,7 @@
-const {PORT,ENV} = require('./constant');
+const {
+	PORT,
+	ENV
+} = require('./constant');
 const conf = require("./config/environment.config")[ENV]
 const logger = require('./utilities/logger')(__filename);
 const app = require('./config/express.config');

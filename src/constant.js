@@ -3,5 +3,5 @@ module.exports = {
     "PORT": process.env.PORT || 4488,
     "SECRET_KEY": "my_secret_key",
     "ROLES": ["user", "driver"],
-    "RADIUS": 3000  // it is in meters
+    "RADIUS": 3000 // it is in meters
 }

@@ -4,4 +4,4 @@ module.exports = {
     reporters: [
         "default"
     ]
-  };
+};

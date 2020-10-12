@@ -1,7 +1,11 @@
 const httpStatus = require('http-status');
-const { ValidationError } = require('express-validation');
+const {
+	ValidationError
+} = require('express-validation');
 const APIError = require('../utilities/APIError');
-const { ENV } = require('../constant');
+const {
+	ENV
+} = require('../constant');
 
 /**
  * Error handler. Send stacktrace only during development

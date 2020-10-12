@@ -23,7 +23,7 @@ class Helper {
 
     // return duration in minutes
     getDuration(startDate, endDate) {
-        let duration = Math.ceil((new Date(endDate) - new Date(startDate))/60000)
+        let duration = Math.ceil((new Date(endDate) - new Date(startDate)) / 60000)
         return duration
     }
 

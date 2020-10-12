@@ -1,4 +1,8 @@
-const { createLogger, format, transports } = require('winston');
+const {
+	createLogger,
+	format,
+	transports
+} = require('winston');
 const path = require('path');
 require('winston-daily-rotate-file');
 
@@ -14,9 +18,15 @@ const colors = {
 const options = (prefix) => ({
 	level: 'debug',
 	format: format.combine(
-		format.label({ label: path.basename(prefix) }),
-		format.colorize({ colors }),
-		format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+		format.label({
+			label: path.basename(prefix)
+		}),
+		format.colorize({
+			colors
+		}),
+		format.timestamp({
+			format: 'YYYY-MM-DD HH:mm:ss'
+		}),
 		format.printf((info) => `${info.timestamp} ${info.level} [${info.label}]: ${info.message}`)
 	),
 	transports: [

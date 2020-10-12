@@ -4,9 +4,9 @@ const Role = mongoose.model(
   "Role",
   new mongoose.Schema({
     name: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true
     }
   })
 );

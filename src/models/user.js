@@ -4,21 +4,21 @@ const User = mongoose.model(
   "User",
   new mongoose.Schema({
     username: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true
     },
     email: {
-        type: String
+      type: String
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     role: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Role"
-      }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Role"
+    }
   })
 );
 
